@@ -126,8 +126,8 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm">Email</p>
-                    <a href="mailto:contact@kindhelp.com" className="text-gray-300 hover:text-[#5B3FFF] transition-colors">
-                      contact@kindhelp.com
+                    <a href="mailto:singlah2505.work@gmail.com" className="text-gray-300 hover:text-[#5B3FFF] transition-colors">
+                      singlah2505.work@gmail.com
                     </a>
                   </div>
                 </div>
@@ -138,8 +138,8 @@ const Footer = () => {
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm">Phone</p>
-                    <a href="tel:+919878369000" className="text-gray-300 hover:text-[#5B3FFF] transition-colors">
-                      +91 9878369000
+                    <a href="tel:+917888525526" className="text-gray-300 hover:text-[#5B3FFF] transition-colors">
+                      +91 7888525526
                     </a>
                   </div>
                 </div>

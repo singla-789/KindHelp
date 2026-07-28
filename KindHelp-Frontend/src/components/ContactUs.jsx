@@ -73,7 +73,7 @@ const ContactUs = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "contact@kindhelp.com",
+      content: "singlah2505.work@gmail.com",
       subtext: "We'll respond within 24 hours",
       color: "from-[#5B3FFF] to-indigo-600",
       bgGradient: "from-purple-50 to-indigo-50",
@@ -82,7 +82,7 @@ const ContactUs = () => {
     {
       icon: Phone,
       title: "Call Us",
-      content: "+91 9878369000",
+      content: "+91 7888525526",
       subtext: "Available Mon-Fri, 9AM-6PM",
       color: "from-indigo-500 to-blue-600",
       bgGradient: "from-indigo-50 to-blue-50",

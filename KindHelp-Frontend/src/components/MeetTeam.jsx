@@ -31,7 +31,7 @@ const MeetTheTeam = () => {
   const teamMembers = [
     
     {
-      name: "Premal Goyal",
+      name: "Himanshu Singla",
       role: "Lead Developer", 
       category: "Developed By",
       image: "/avi.png", // Replace with your actual image path
