@@ -12,6 +12,8 @@ const DonorMedicineList = () => {
   const [medicines, setMedicines] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [selectedMed, setSelectedMed] = useState(null);
+
   const handleFetch = async () => {
     if (!emailid) return alert("Please enter an Email ID");
     
@@ -159,7 +161,7 @@ const DonorMedicineList = () => {
                           </div>
                           <div>
                             <h3 className="text-2xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-200">
-                              {med.medname}
+                              {med.medicine}
                             </h3>
                             <div className="flex items-center gap-2 mt-1">
                               <Building2 className="w-4 h-4 text-gray-400" />
@@ -231,7 +233,7 @@ const DonorMedicineList = () => {
                         </button>
                         <button
                           onClick={() => {
-                            if (window.confirm(`Are you sure you want to delete "${med.medname}"? This action cannot be undone.`)) {
+                            if (window.confirm(`Are you sure you want to delete "${med.medicine}"? This action cannot be undone.`)) {
                               handleDelete(med._id);
                             }
                           }}
@@ -241,7 +243,7 @@ const DonorMedicineList = () => {
                           Delete
                         </button>
                         <button
-                          onClick={() => alert(`Viewing details for ${med.medname}`)}
+                          onClick={() => setSelectedMed(med)}
                           className="flex items-center gap-2 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 font-medium px-6 py-3 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
                         >
                           <Eye className="w-4 h-4" />
@@ -296,6 +298,67 @@ const DonorMedicineList = () => {
                   {medicines.filter(med => isExpired(med.expdate)).length}
                 </div>
                 <div className="text-sm text-red-800">Expired</div>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {/* View Details Modal */}
+        {selectedMed && (
+          <div 
+            className="fixed inset-0 flex items-center justify-center z-50 p-4"
+            style={{
+              backgroundColor: 'rgba(0, 0, 0, 0.4)',
+              backdropFilter: 'blur(4px)'
+            }}
+            onClick={() => setSelectedMed(null)}
+          >
+            <div 
+              className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white flex justify-between items-center">
+                <h3 className="text-2xl font-bold">{selectedMed.medicine}</h3>
+                <button 
+                  onClick={() => setSelectedMed(null)}
+                  className="text-white hover:text-gray-200"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+              </div>
+              <div className="p-6 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <p className="text-xs text-gray-500 font-semibold uppercase">Company</p>
+                    <p className="text-gray-900 font-medium">{selectedMed.company}</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <p className="text-xs text-gray-500 font-semibold uppercase">Quantity</p>
+                    <p className="text-gray-900 font-medium">{selectedMed.qty}</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <p className="text-xs text-gray-500 font-semibold uppercase">Packaging</p>
+                    <p className="text-gray-900 font-medium">{selectedMed.packing}</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <p className="text-xs text-gray-500 font-semibold uppercase">Expiry Date</p>
+                    <p className="text-gray-900 font-medium">{dayjs(selectedMed.expdate).format("DD MMM YYYY")}</p>
+                  </div>
+                </div>
+                {selectedMed.info && (
+                  <div className="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                    <p className="text-xs text-indigo-500 font-semibold uppercase mb-1">Additional Information</p>
+                    <p className="text-indigo-900">{selectedMed.info}</p>
+                  </div>
+                )}
+              </div>
+              <div className="p-6 pt-0 flex justify-end">
+                <button 
+                  onClick={() => setSelectedMed(null)}
+                  className="bg-gray-200 text-gray-800 px-6 py-2 rounded-xl hover:bg-gray-300 transition-colors font-semibold"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>

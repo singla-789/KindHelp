@@ -6,7 +6,7 @@ var env=require('dotenv').config();
 
 cloudinary.config({ 
     
-    cloud_name: 'dspfowrvd', 
+    cloud_name: process.env.CloudName, 
     api_key: process.env.Cloudapi_key, 
     api_secret: process.env.CloudSec_key // Click 'View API Keys' above to copy your API secret
     });

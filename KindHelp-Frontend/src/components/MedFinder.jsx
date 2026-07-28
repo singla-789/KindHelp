@@ -437,24 +437,57 @@ const MedFinder = () => {
                   </div>
                 </div>
 
-                {/* Address */}
-                {selectedContact.address && (
-                  <div className="bg-purple-50/80 backdrop-blur-sm rounded-xl p-4 border border-purple-200/50">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex-1">
-                        <p className="text-sm font-semibold text-purple-600 mb-1">Address</p>
-                        <p className="text-sm font-bold text-purple-800">{selectedContact.address}</p>
-                      </div>
-                      <div className="text-2xl">📍</div>
+                {/* Address and Map Section */}
+                <div className="bg-purple-50/80 backdrop-blur-sm rounded-xl p-4 border border-purple-200/50">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-purple-600 mb-1">Pickup Address</p>
+                      <p className="text-sm font-bold text-purple-800">
+                        {selectedContact.address ? selectedContact.address : "No address provided by donor"}
+                      </p>
                     </div>
-                    <button
-                      onClick={() => copyToClipboard(selectedContact.address, 'Address')}
-                      className="w-full bg-purple-100 text-purple-700 py-2 px-4 rounded-lg hover:bg-purple-200 transition-colors font-semibold"
-                    >
-                      📋 Copy Address
-                    </button>
+                    <div className="text-2xl">📍</div>
                   </div>
-                )}
+                  
+                  {/* Embedded Map (Only if address exists) */}
+                  {selectedContact.address ? (
+                    <>
+                      <div className="mb-3 overflow-hidden rounded-lg border border-purple-200 shadow-inner">
+                        <iframe 
+                          width="100%" 
+                          height="180" 
+                          style={{ border: 0 }} 
+                          loading="lazy" 
+                          allowFullScreen 
+                          src={`https://www.google.com/maps?q=${encodeURIComponent(selectedContact.address)}&output=embed`}
+                          title="Pickup Location Map"
+                        ></iframe>
+                      </div>
+
+                      <div className="flex space-x-2">
+                        <a
+                          href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(selectedContact.address)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex justify-center items-center bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors font-semibold"
+                        >
+                          🧭 Get Directions
+                        </a>
+                        <button
+                          onClick={() => copyToClipboard(selectedContact.address, 'Address')}
+                          className="bg-purple-100 text-purple-700 py-2 px-4 rounded-lg hover:bg-purple-200 transition-colors font-semibold"
+                          title="Copy Address"
+                        >
+                          📋
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center py-4 text-purple-600/70 text-sm italic">
+                      Map unavailable without an address.
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Modal Footer */}
